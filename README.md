@@ -1,9 +1,9 @@
 <p align="center">
-<img src="https://huggingface.co/datasets/MakiAi/IconAssets/resolve/main/Scrapdown.png" width="100%">
+<img src="https://huggingface.co/datasets/MakiAi/IconAssets/resolve/main/S.O.P.H.I.A..jpg" width="100%">
 <br>
-<h1 align="center">SOPHIA</h1>
+<h1 align="center">S.O.P.H.I.A.</h1>
 <h2 align="center">
-  ～ S.O.P.H.I.A.（Self-Organizing Personal Hosting Integrated Application） ～
+  ～ Self-Organizing Personal Hosting Integrated Application ～
 <br>
   <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/SOPHIA">
 <img alt="PyPI - Format" src="https://img.shields.io/pypi/format/SOPHIA">
