@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  sophia:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    volumes:
+      - ./data:/data
+      - ./projects:/projects
+    ports:
+      - "8888:8888"
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    # command: tail -f /dev/null
+    tty: true
