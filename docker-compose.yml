@@ -1,0 +1,34 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.SOPHIA
+    volumes:
+      - ./:/app
+      - ./.cache:/root/.cache
+      - SOPHIA-docker:/var/lib/docker
+    tty: true
+    privileged: true
+    working_dir: /app
+    ports:
+      - "5115:5000"
+      - "2332:22"
+      - "5080:80"
+    env_file:
+      - .env
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    hostname: SOPHIA-Container
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+            
+    environment:
+        NVIDIA_VISIBLE_DEVICES: "all"
+        QT_X11_NO_MITSHM: "1"
+        JUPYTER_PASS: "password"
+
+volumes:
+  SOPHIA-docker: {}

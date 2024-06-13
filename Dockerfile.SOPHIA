@@ -1,0 +1,62 @@
+# Dockerfile
+# FROM ubuntu:latest
+FROM ghcr.io/ehfd/nvidia-dind:latest
+# FROM nvidia/cuda:11.1.1-cudnn8-runtime-ubuntu18.04
+
+# 必要なパッケージのインストール
+RUN apt-get update && \
+    apt-get install -y openssh-server python3 python3-pip git iputils-ping net-tools nmon curl
+
+# SSHの設定
+RUN mkdir /var/run/sshd && \
+    mkdir /root/.ssh && \
+    chmod 700 /root/.ssh
+
+# 公開鍵と設定ファイルの追加
+COPY ./secret/id_ed25519_for_SOPHIA.pub /root/.ssh/authorized_keys
+COPY ./secret/ssh.config /root/.ssh/config
+COPY ./secret/id_ed25519_for_SOPHIA /root/.ssh/id_ed25519_for_SOPHIA
+
+RUN chmod 600 /root/.ssh/authorized_keys && \
+    chmod 600 /root/.ssh/config && \
+    chmod 600 /root/.ssh/id_ed25519_for_SOPHIA && \
+    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config && \
+    sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config && \
+    sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+
+# SSHのポート設定
+EXPOSE 2332
+
+# ワークディレクトリの設定
+WORKDIR /app
+
+# Pythonパッケージのインストール
+COPY requirements.txt .
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Gitの設定
+RUN git config --global --add safe.directory /app && \
+    git config --global user.email "masaki.tani@aisin.co.jp" && \
+    git config --global user.name "tani"
+
+# clearmlのインストール
+# RUN pip3 install clearml
+
+USER root
+ENV USER root
+
+# Dockerのインストール
+RUN curl https://get.docker.com | sh
+RUN usermod -aG docker $USER
+
+# wrapdockerのインストール
+RUN curl -sSL https://raw.githubusercontent.com/billyteves/ubuntu-dind/master/wrapdocker -o /usr/local/bin/wrapdocker
+RUN chmod +x /usr/local/bin/wrapdocker
+VOLUME /var/lib/docker
+
+# Docker Composeのインストール
+RUN curl -L https://github.com/docker/compose/releases/download/v2.27.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+RUN chmod +x /usr/local/bin/docker-compose
+
+# SSHサーバーとDockerデーモンの起動
+CMD /usr/local/bin/wrapdocker & /usr/sbin/sshd -D

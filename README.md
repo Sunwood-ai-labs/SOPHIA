@@ -1,9 +1,9 @@
 <p align="center">
-<img src="https://huggingface.co/datasets/MakiAi/IconAssets/resolve/main/Scrapdown.png" width="100%">
+<img src="https://huggingface.co/datasets/MakiAi/IconAssets/resolve/main/S.O.P.H.I.A..jpg" width="100%">
 <br>
-<h1 align="center">SOPHIA</h1>
+<h1 align="center">S.O.P.H.I.A.</h1>
 <h2 align="center">
-  ～ S.O.P.H.I.A.（Self-Organizing Personal Hosting Integrated Application） ～
+  ～ Self-Organizing Personal Hosting Integrated Application ～
 <br>
   <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/SOPHIA">
 <img alt="PyPI - Format" src="https://img.shields.io/pypi/format/SOPHIA">
@@ -36,7 +36,7 @@
 
 ## 🌟 イントロダクション
 
-Pegasusは、ウェブサイトを再帰的にクロールし、コンテンツを美しくフォーマットされたMarkdownドキュメントに変換するパワフルで柔軟なPythonパッケージです。指定されたURLから開始し、リンクを辿って関連ページを探索し、HTMLコンテンツを構造化されたMarkdownファイルに変換します。
+S.O.P.H.I.A.は、制約のあるサーバー上のDockerの中にさらにDocker環境を構築（DinD）することで自由な開発環境を手に入れるプロジェクトです。これにより、開発者は制約に縛られることなく、柔軟で強力な開発環境を構築することができます。さらに、ローカル環境からDockerコンテナ内へのSSH接続やGPUの使用も可能です。
 
 ## 🎥 デモ
 
@@ -44,15 +44,15 @@ Pegasusは、ウェブサイトを再帰的にクロールし、コンテンツ�
 
 ## 🚀 スタートガイド
 
-このリポジトリは、Docker Composeを使ってPegasusを簡単に実行するための設定を提供します。Pegasusをすぐに使い始めるには、以下の手順に従ってください。
+このリポジトリは、Docker Composeを使ってS.O.P.H.I.A.を簡単に実行するための設定を提供します。S.O.P.H.I.A.をすぐに使い始めるには、以下の手順に従ってください。
 
 **手順:**
 
 1. **リポジトリのクローン:**
 
    ```bash
-   git clone https://github.com/[your-username]/pegasus-docker.git
-   cd pegasus-docker
+   git clone https://github.com/Sunwood-ai-labs/SOPHIA.git
+   cd SOPHIA
    ```
 
 2. **Docker Composeの起動:**
@@ -61,37 +61,53 @@ Pegasusは、ウェブサイトを再帰的にクロールし、コンテンツ�
    docker-compose up -d
    ```
 
-3. **Pegasusの実行:**
+3. **S.O.P.H.I.A.の実行:**
 
    ```bash
-   docker-compose exec pegasus pegasus [options] <url>
+   docker-compose exec sophia [command]
    ```
 
    **例:**
 
    ```bash
-   docker-compose exec pegasus pegasus https://www.example.com
+   docker-compose exec sophia bash
    ```
 
-**オプション:**
+これにより、制約のないDocker環境内でbashシェルが起動し、自由に開発作業を行うことができます。
 
-Pegasusのコマンドラインオプションの詳細については、 `pegasus --help` を実行してください。
+**SSH接続:**
 
-**詳細については、Pegasusの公式ドキュメントをご覧ください:** [https://pegasus-docs.example.com](https://pegasus-docs.example.com) 
+ローカル環境からDockerコンテナ内へのSSH接続も可能です。以下のコマンドを使用してください。
+
+```bash
+cd secret
+ssh root@localhost -p 2332 -i id_ed25519_for_SOPHIA
+```
+
+このコマンドは、`secret`ディレクトリに移動し、`id_ed25519_for_SOPHIA`秘密鍵を使用してポート2332経由でDockerコンテナ内にSSH接続します。
+
+**GPU使用:**
+
+S.O.P.H.I.A.はGPUの使用もサポートしています。`docker-compose.yml`ファイルの設定を調整することで、コンテナ内でGPUを利用できます。
 
 ## 📝 更新情報
 
-(最新の更新情報があればここに記載)
+
+
+## 📝 開発用
+
+```bash
+sourcesage -f docs\.sourcesage_releasenotes.yml
+```
 
 ##  🤝 コントリビューション
 
-(コントリビューションの方法があればここに記載)
+
 
 ## 📄 ライセンス
 
-(ライセンスがあればここに記載)
+
 
 ## 🙏 謝辞
 
-(謝辞があればここに記載)
 
