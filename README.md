@@ -93,6 +93,13 @@ S.O.P.H.I.A.はGPUの使用もサポートしています。`docker-compose.yml`
 ## 📝 更新情報
 
 
+
+## 📝 開発用
+
+```bash
+sourcesage -f docs\.sourcesage_releasenotes.yml
+```
+
 ##  🤝 コントリビューション
 
 
@@ -102,4 +109,5 @@ S.O.P.H.I.A.はGPUの使用もサポートしています。`docker-compose.yml`
 
 
 ## 🙏 謝辞
+
 
