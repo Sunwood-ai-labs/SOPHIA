@@ -38,3 +38,6 @@ aira.egg-info
 aira.Gaiah.md
 README_template.md
 .github
+secret
+
+.cache
