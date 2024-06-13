@@ -1,0 +1,35 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.GPU
+    volumes:
+      - ./:/app
+      # - /nfs/active/stats/workspace/tani/bleague_player_cluster/archive:/app/archive
+      # - /nfs/active/stats/workspace/tani/bleague_player_cluster/mlruns:/app/mlruns
+      # - .ssh:/root/.ssh
+      # - ./:/app
+    tty: true
+    privileged: true
+    ports:
+      - "5115:5000"
+      - "2332:22"
+      - "5080:80"
+      # - "8080:8080"
+      # http://pre1:5005/
+    env_file:
+      - .env
+    # command: mlflow ui --backend-store-uri ./mlruns3 --host 0.0.0.0 --gunicorn-opts "--timeout 1800"
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    hostname: SOPHIA-GPU-Check
+    # GPU を使用するためランタイムを指定
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    environment:
+        NVIDIA_VISIBLE_DEVICES: "all"
+        QT_X11_NO_MITSHM: "1"
+        JUPYTER_PASS: "password"
